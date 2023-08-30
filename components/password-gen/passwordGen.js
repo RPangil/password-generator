@@ -31,10 +31,18 @@ const PasswordGen = () =>
 
     const getPassLength = (e) =>
     {
-        setPassLen(e.target.value);
+        let len = e.target.value;
+
+        if(len > 20)
+        {
+            len = 20;
+            alert('Max value is 20!');
+        }
+
+        setPassLen(len);
     }
 
-    const generatePassword = (e) =>
+    const generatePassword = () =>
     {
         setGenPass('');
         let tempPass = ''
@@ -73,7 +81,7 @@ const PasswordGen = () =>
                     <output name='password'>{genPass}</output>
                 </div>
                 <label htmlFor='passLength'>Password Length</label>
-                <input type='number' id='passLength' name='passLength' min={8} max={16} onChange={getPassLength} value={passLen} />
+                <input type='number' id='passLength' name='passLength' min={8} max={20} onChange={getPassLength} value={passLen} />
                 <label htmlFor='upperCase'>Include uppercase letters</label>
                 <input type='checkbox' id='upperCase' onClick={includeUpperCase} />
                 <label htmlFor='upperCase'>Include numbers</label>
