@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { Fragment, useState } from "react";
 import style from './passwordGen.module.css';
 
 const PasswordGen = () =>
@@ -13,6 +13,7 @@ const PasswordGen = () =>
     const [upperCase, setUpperCase] = useState(false);
     const [numbers, setNumbers] = useState(false);
     const [symbols, setSymbols] = useState(false);
+    const [isCopied, setIsCopied] = useState(false);
     const [passLen, setPassLen] = useState(8);
 
     const includeUpperCase = () =>
@@ -46,6 +47,12 @@ const PasswordGen = () =>
     const copyClipboard = () =>
     {
         navigator.clipboard.writeText(genPass);
+        setIsCopied(true);
+
+        setTimeout(()=>
+        {
+            setIsCopied(false);
+        }, 4000);
     }
 
     const generatePassword = () =>
@@ -80,32 +87,37 @@ const PasswordGen = () =>
     }
 
     return (
-        <div className={style.body}>
-            <h1 className={style.title}>Password Generator</h1>
-            <form className={style.form}>
-                <div className={style.output}>
-                    <output name='password'>{genPass}</output>
-                    <div className={style.clipboard} onClick={copyClipboard}></div>
-                </div>
-                <div className={`${style.row} ${style.flex} ${style.flexSpaceBetween}`}>
-                    <label htmlFor='passLength'>Password Length</label>
-                    <input type='number' id='passLength' name='passLength' min={8} max={20} onChange={getPassLength} value={passLen} />
-                </div>
-                <div className={`${style.row} ${style.flex} ${style.flexSpaceBetween}`}>
-                    <label htmlFor='upperCase'>Include uppercase letters</label>
-                    <input type='checkbox' id='upperCase' onClick={includeUpperCase} />
-                </div>
-                <div className={`${style.row} ${style.flex} ${style.flexSpaceBetween}`}>
-                    <label htmlFor='numbers'>Include numbers</label>
-                    <input type='checkbox' id='numbers' onClick={includeNumbers} />
-                </div>
-                <div className={`${style.row} ${style.flex} ${style.flexSpaceBetween}`}>
-                    <label htmlFor='symbols'>Include symbols</label>
-                    <input type='checkbox' id='symbols' onClick={includeSymbols} />
-                </div>
-                <button type='button' onClick={generatePassword}>Generate Password</button>
-            </form>
-        </div>
+        <Fragment>
+            <div className={style.body}>
+                <h1 className={style.title}>Password Generator</h1>
+                <form className={style.form}>
+                    <div className={style.output}>
+                        <output name='password'>{genPass}</output>
+                        <div className={style.clipboard} onClick={copyClipboard}></div>
+                    </div>
+                    <div className={`${style.row} ${style.flex} ${style.flexSpaceBetween}`}>
+                        <label htmlFor='passLength'>Password Length</label>
+                        <input type='number' id='passLength' name='passLength' min={8} max={20} onChange={getPassLength} value={passLen} />
+                    </div>
+                    <div className={`${style.row} ${style.flex} ${style.flexSpaceBetween}`}>
+                        <label htmlFor='upperCase'>Include uppercase letters</label>
+                        <input type='checkbox' id='upperCase' onClick={includeUpperCase} />
+                    </div>
+                    <div className={`${style.row} ${style.flex} ${style.flexSpaceBetween}`}>
+                        <label htmlFor='numbers'>Include numbers</label>
+                        <input type='checkbox' id='numbers' onClick={includeNumbers} />
+                    </div>
+                    <div className={`${style.row} ${style.flex} ${style.flexSpaceBetween}`}>
+                        <label htmlFor='symbols'>Include symbols</label>
+                        <input type='checkbox' id='symbols' onClick={includeSymbols} />
+                    </div>
+                    <button type='button' onClick={generatePassword}>Generate Password</button>
+                </form>
+            </div>
+            <div className={isCopied ? `${style.copyPass} ${style.visible}` : style.copyPass }>
+                <p>Generated password has been added to clipboard</p>
+            </div>
+        </Fragment>
     );
 }
 
