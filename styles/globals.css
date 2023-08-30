@@ -5,7 +5,13 @@
     margin: 0;
 }
 
-body 
+body
+{
+    font-size: 18px;
+    letter-spacing: 0.05em;
+}
+
+main 
 {
     height: 100vh;
     display: flex;
