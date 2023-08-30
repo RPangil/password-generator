@@ -43,6 +43,11 @@ const PasswordGen = () =>
         setPassLen(len);
     }
 
+    const copyClipboard = () =>
+    {
+        navigator.clipboard.writeText(genPass);
+    }
+
     const generatePassword = () =>
     {
         setGenPass('');
@@ -80,7 +85,7 @@ const PasswordGen = () =>
             <form className={style.form}>
                 <div className={style.output}>
                     <output name='password'>{genPass}</output>
-                    <div className={style.clipboard}></div>
+                    <div className={style.clipboard} onClick={copyClipboard}></div>
                 </div>
                 <div className={`${style.row} ${style.flex} ${style.flexSpaceBetween}`}>
                     <label htmlFor='passLength'>Password Length</label>
