@@ -14,6 +14,27 @@ const PasswordGen = () =>
     const [symbols, setSymbols] = useState(false);
     const [passLen, setPassLen] = useState(8);
 
+    const includeUpperCase = () =>
+    {
+        setUpperCase(!upperCase);
+    }
+
+    const includeNumbers = () =>
+    {
+        setNumbers(!numbers);
+    }
+
+    const includeSymbols = () =>
+    {
+        setSymbols(!symbols);
+    }
+
+    const getPassLength = (e) =>
+    {
+        setPassLen(e.target.value);
+    }
+
+
     return (
         <Fragment>
             <h1>Password Generator</h1>
