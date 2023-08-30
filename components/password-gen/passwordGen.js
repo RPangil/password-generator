@@ -34,6 +34,36 @@ const PasswordGen = () =>
         setPassLen(e.target.value);
     }
 
+    const generatePassword = (e) =>
+    {
+        setGenPass('');
+        let tempPass = ''
+        let tempChars = chars[0];
+
+        if(upperCase)
+        {
+            tempChars += chars[1];
+        }
+        
+        if(numbers)
+        {
+            tempChars += chars[2];
+        }
+        
+        if(symbols)
+        {
+            tempChars += chars[3];
+        }
+
+        let charLength = tempChars.length;
+
+        for(let i = 0; i < passLen; i++)
+        {
+            tempPass += tempChars.charAt(Math.round(Math.random() * charLength));
+        }
+
+        setGenPass(tempPass);
+    }
 
     return (
         <Fragment>
