@@ -1,4 +1,5 @@
-import { Fragment, useState } from "react";
+import { useState } from "react";
+import style from './passwordGen.module.css';
 
 const PasswordGen = () =>
 {
@@ -74,23 +75,31 @@ const PasswordGen = () =>
     }
 
     return (
-        <Fragment>
-            <h1>Password Generator</h1>
-            <form>
-                <div>
+        <div className={style.body}>
+            <h1 className={style.title}>Password Generator</h1>
+            <form className={style.form}>
+                <div className={style.output}>
                     <output name='password'>{genPass}</output>
                 </div>
-                <label htmlFor='passLength'>Password Length</label>
-                <input type='number' id='passLength' name='passLength' min={8} max={20} onChange={getPassLength} value={passLen} />
-                <label htmlFor='upperCase'>Include uppercase letters</label>
-                <input type='checkbox' id='upperCase' onClick={includeUpperCase} />
-                <label htmlFor='upperCase'>Include numbers</label>
-                <input type='checkbox' id='upperCase' onClick={includeNumbers} />
-                <label htmlFor='upperCase'>Include symbols</label>
-                <input type='checkbox' id='upperCase' onClick={includeSymbols} />
+                <div className={`${style.row} ${style.flex} ${style.flexSpaceBetween}`}>
+                    <label htmlFor='passLength'>Password Length</label>
+                    <input type='number' id='passLength' name='passLength' min={8} max={20} onChange={getPassLength} value={passLen} />
+                </div>
+                <div className={`${style.row} ${style.flex} ${style.flexSpaceBetween}`}>
+                    <label htmlFor='upperCase'>Include uppercase letters</label>
+                    <input type='checkbox' id='upperCase' onClick={includeUpperCase} />
+                </div>
+                <div className={`${style.row} ${style.flex} ${style.flexSpaceBetween}`}>
+                    <label htmlFor='numbers'>Include numbers</label>
+                    <input type='checkbox' id='numbers' onClick={includeNumbers} />
+                </div>
+                <div className={`${style.row} ${style.flex} ${style.flexSpaceBetween}`}>
+                    <label htmlFor='symbols'>Include symbols</label>
+                    <input type='checkbox' id='symbols' onClick={includeSymbols} />
+                </div>
                 <button type='button' onClick={generatePassword}>Generate Password</button>
             </form>
-        </Fragment>
+        </div>
     );
 }
 
