@@ -80,6 +80,7 @@ const PasswordGen = () =>
             <form className={style.form}>
                 <div className={style.output}>
                     <output name='password'>{genPass}</output>
+                    <div className={style.clipboard}></div>
                 </div>
                 <div className={`${style.row} ${style.flex} ${style.flexSpaceBetween}`}>
                     <label htmlFor='passLength'>Password Length</label>
